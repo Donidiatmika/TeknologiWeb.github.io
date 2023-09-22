@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: rgb(183, 209, 216);
+            border: none;
+            cursor: pointer;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kalkulator Sederhana</h1>
+
+        <h2>Deret Fibonacci</h2>
+        <input type="number" id="angkaFibonaci" placeholder="Angka">
+        <button onclick="CariFibonaci()">Hitung Fibonacci</button>
+        <div id="hasilFibonaci"></div>
+
+        <hr>
+
+        <h2>Volume Bangun Ruang</h2>
+        <label for="shape">Pilih jenis bangun ruang:</label>
+        <select id="shape">
+            <option value="kubus">Kubus</option>
+            <option value="bola">Bola</option>
+        </select>
+    <br><br>
+        <input type="number" id="input1" placeholder="Angka">
+        <button onclick="cariVolume()">Hitung Volume</button>
+        <div id="volumeResult"></div>
+    </div>
+
+    <script>
+        function CariFibonaci() {
+            const input = document.getElementById('angkaFibonaci');
+            const result = document.getElementById('hasilFibonaci');
+            const num = parseInt(input.value);
+
+            if (isNaN(num) || num < 0) {
+                result.textContent = 'Masukkan angka positif.';
+                return;
+            }
+
+            let a = 0, b = 1, next;
+
+            for (let i = 0; i < num; i++) {
+                if (i === 0) {
+                    result.textContent = 'Deret Fibonacci: 0';
+                } else if (i === 1) {
+                    result.textContent += ', 1';
+                } else {
+                    next = a + b;
+                    result.textContent += ', ' + next;
+                    a = b;
+                    b = next;
+                }
+            }
+        }
+
+        function cariVolume() {
+            const shapeSelect = document.getElementById('shape');
+            const input1 = parseFloat(document.getElementById('input1').value);
+
+            const volumeResult = document.getElementById('volumeResult');
+            const selectedShape = shapeSelect.value;
+
+            if (isNaN(input1)) {
+                volumeResult.textContent = 'Masukkan angka valid.';
+                return;
+            }
+
+            let volume;
+
+            switch (selectedShape) {
+                case 'kubus':
+                    volume = input1 ** 3;
+                    break;
+                case 'bola':
+                    volume = (4 / 3) * Math.PI * (input1 ** 3);
+                    break;
+                default:
+                    volume = 0;
+                    break;
+            }
+
+            volumeResult.textContent = `Volume: ${volume.toFixed(1)}`;
+        }
+    </script>
+</body>
+</html>
